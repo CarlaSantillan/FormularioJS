@@ -1,0 +1,41 @@
+!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verificación reCAPTCHA</title>
+
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+  <h1>Verificación</h1>
+
+  <form id="formulario">
+    <div
+      class="g-recaptcha"
+      data-sitekey="6LcOH_4tAAAAAJeM8Xk20dahF5O0otq8NOobvef2">
+    </div>
+
+    <br>
+    <button type="submit">Verificar</button>
+    <p id="mensaje"></p>
+  </form>
+
+  <script>
+    document
+      .getElementById("formulario")
+      .addEventListener("submit", function (evento) {
+        evento.preventDefault();
+
+        const respuesta = grecaptcha.getResponse();
+        const mensaje = document.getElementById("mensaje");
+
+        if (respuesta.length === 0) {
+          mensaje.textContent = "Primero marcá la casilla de reCAPTCHA.";
+        } else {
+          mensaje.textContent = "Completaste el reCAPTCHA.";
+        }
+      });
+  </script>
+</body>
+</html>
